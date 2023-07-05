@@ -1,10 +1,12 @@
 public class PunktLast {
     //Attribute
-    double laenge;
+    double ort;
+    double kraft;
 
     //Konstruktor
-    //pll=Punktlast Laenge
-    public PunktLast(double pll){
-        laenge=pll;
+
+    public PunktLast(double o,double k){
+        ort=o;
+        kraft=k;
     }
 }

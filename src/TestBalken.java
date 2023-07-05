@@ -9,10 +9,20 @@ public class TestBalken {
         System.out.println("Keine = 4");
         int n=Tastatur.liesInt("Bitte wählen sie die Entschprechende Zahl aus ");
         if(n==1){
-            PunktLast p1 = new PunktLast(Tastatur.liesDouble("Auf Welche länge des Balkens befindet sich die Punktlast ? "));
+            PunktLast p1 = new PunktLast(Tastatur.liesDouble("Auf Welche länge des Balkens befindet sich die Punktlast ? "),Tastatur.liesDouble("Wie stark ist die Kraft der Last" ));
         }
         else if(n==2){
-            GleichLast g1 = new GleichLast(Tastatur.liesDouble("Auf Welche länge des Balkens beginnt die Gleichlast ? "),Tastatur.liesDouble("Auf Welche länge des Balkens endet die Gleichlast ? "));
+            GleichLast g1 = new GleichLast(Tastatur.liesDouble("Auf Welche länge des Balkens beginnt die Gleichlast ? "),Tastatur.liesDouble("Auf Welche länge des Balkens endet die Gleichlast ? "),Tastatur.liesDouble("Wie stark ist die Kraft der Last" ));
+        }
+        else if(n==3){
+            DreieckLast d1 = new DreieckLast(Tastatur.liesDouble("Auf Welche länge des Balkens beginnt die Dreiecklast ? "),Tastatur.liesDouble("Auf Welche länge des Balkens endet die Gleichlast ? "),Tastatur.liesDouble("Wie stark ist die Kraft der Last" ),Tastatur.liesString("Wird das Dreieck größer ?"));
+
+        }
+        else if(n==4){
+
+        }
+        else{
+
         }
     }
 
