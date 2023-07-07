@@ -1,12 +1,32 @@
 public class PunktLast {
     //Attribute
-    double ort;
-    double kraft;
+    private double ort;
+    private double kraft;
 
     //Konstruktor
 
     public PunktLast(double o,double k){
         ort=o;
         kraft=k;
+    }
+/*    public BerechneQuerKraftPunkt(double q1){
+        if()
+    }*/
+
+    //Getter und Setter
+    public double getOrt() {
+        return ort;
+    }
+
+    public void setOrt(double ort) {
+        this.ort = ort;
+    }
+
+    public double getKraft() {
+        return kraft;
+    }
+
+    public void setKraft(double kraft) {
+        this.kraft = kraft;
     }
 }
