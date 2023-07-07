@@ -10,16 +10,21 @@ public class TestBalken {
         int n=Tastatur.liesInt("Bitte wählen sie die Entschprechende Zahl aus ");
         if(n==1){
             PunktLast p1 = new PunktLast(Tastatur.liesDouble("Auf Welche länge des Balkens befindet sich die Punktlast ? "),Tastatur.liesDouble("Wie stark ist die Kraft der Last" ));
+            double ak1= p1.ort/ b1.laenge* p1.kraft;
+            double ak2= p1.kraft-ak1;
+            System.out.println("Auflagerkraft 1 ist "+ak1+" und Auflagerkraft 2 ist "+ak2);
         }
         else if(n==2){
             GleichLast g1 = new GleichLast(Tastatur.liesDouble("Auf Welche länge des Balkens beginnt die Gleichlast ? "),Tastatur.liesDouble("Auf Welche länge des Balkens endet die Gleichlast ? "),Tastatur.liesDouble("Wie stark ist die Kraft der Last" ));
             double ak1= g1.BerechneResultierendeStandort()/ b1.laenge*g1.BerechneResultierende();
             double ak2= g1.BerechneResultierende()-ak1;
+            System.out.println("Auflagerkraft 1 ist "+ak1+" und Auflagerkraft 2 ist "+ak2);
         }
         else if(n==3){
             DreieckLast d1 = new DreieckLast(Tastatur.liesDouble("Auf Welche länge des Balkens beginnt die Dreiecklast ? "),Tastatur.liesDouble("Auf Welche länge des Balkens endet die Gleichlast ? "),Tastatur.liesDouble("Wie stark ist die Kraft der Last" ),Tastatur.liesString("Wird das Dreieck größer ?"));
             double ak1= d1.BerechneResultierendeStandort()/ b1.laenge*d1.BerechneResultierende();
             double ak2= d1.BerechneResultierende()-ak1;
+            System.out.println("Auflagerkraft 1 ist "+ak1+" und Auflagerkraft 2 ist "+ak2);
         }
         else if(n==4){
 
