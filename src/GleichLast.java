@@ -1,8 +1,8 @@
 public class GleichLast {
     //Attribute
-    double anfangspunkt;
-    double endpunkt;
-    double kraft;
+    private double anfangspunkt;
+    private double endpunkt;
+    private double kraft;
 
     //Konstruktor
     //
@@ -12,13 +12,37 @@ public class GleichLast {
         kraft =k;
     }
     //Methoden
-    public double BerechneResultierendeStandort(){
+    public double berechneResultierendeStandort(){
         return (anfangspunkt+endpunkt)/2;
     }
-    public double Berechnelange(){
+    public double berechnelange(){
         return endpunkt-anfangspunkt;
     }
-    public double BerechneResultierende(){
-        return Berechnelange()*kraft;
+    public double berechneResultierende(){
+        return berechnelange()*kraft;
+    }
+
+    public double getAnfangspunkt() {
+        return anfangspunkt;
+    }
+
+    public void setAnfangspunkt(double anfangspunkt) {
+        this.anfangspunkt = anfangspunkt;
+    }
+
+    public double getEndpunkt() {
+        return endpunkt;
+    }
+
+    public void setEndpunkt(double endpunkt) {
+        this.endpunkt = endpunkt;
+    }
+
+    public double getKraft() {
+        return kraft;
+    }
+
+    public void setKraft(double kraft) {
+        this.kraft = kraft;
     }
 }

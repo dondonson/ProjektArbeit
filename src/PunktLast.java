@@ -4,14 +4,10 @@ public class PunktLast {
     private double kraft;
 
     //Konstruktor
-
     public PunktLast(double o,double k){
         ort=o;
         kraft=k;
     }
-/*    public BerechneQuerKraftPunkt(double q1){
-        if()
-    }*/
 
     //Getter und Setter
     public double getOrt() {
