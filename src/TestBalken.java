@@ -80,9 +80,7 @@ public class TestBalken {
             double ak2= d1.BerechneResultierende()-ak1;
             System.out.println("Auflagerkraft 1 ist "+ak1+" und Auflagerkraft 2 ist "+ak2);
         }
-        else{
-            return;
-        }
+
         Viewer v = new Viewer();
         b1.zu3D(v);
         v.setVisible(true);
