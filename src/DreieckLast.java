@@ -1,32 +1,27 @@
 public class DreieckLast {
     //Attribute
-    double anfangspunkt;
-    double endpunkt;
+    double leange;
     double kraft;
-    String ausrichtung;
+    boolean ausrichtung;
 
     //Konstruktor
-    //
-    public DreieckLast(double dla,double dle, double k, String a){
-        anfangspunkt=dla;
-        endpunkt=dle;
+
+    public DreieckLast(double l, double k, boolean a){
+        leange=l;
         kraft=k;
         ausrichtung=a;
     }
     //Methoden
     public double BerechneResultierendeStandort(){
-        if(ausrichtung=="ja"||ausrichtung=="Ja"){
-            return (anfangspunkt + endpunkt) * 2 / 3;
-        } else if(ausrichtung =="nein"||ausrichtung=="Nein") {
-            return (anfangspunkt + endpunkt) * 1 / 3;
+        if(ausrichtung = true){
+            return (leange) * 2 / 3;
+        } else {
+            return (leange) * 1 / 3;
         }
-        return BerechneResultierendeStandort();
     }
-    public double Berechnelange(){
-        return endpunkt-anfangspunkt;
-    }
+
     public double BerechneResultierende(){
-        return Berechnelange()*0.5*kraft;
+        return leange*0.5*kraft;
     }
 
 
