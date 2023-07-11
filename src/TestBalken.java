@@ -82,6 +82,8 @@ public class TestBalken {
             } else {
                 return;
             }
+            //Visualisierung
+            g.zu3D(v);
 
         }
         else if(n==3){

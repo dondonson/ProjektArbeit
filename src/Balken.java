@@ -11,7 +11,7 @@ public class Balken {
     }
     public void zu3D(Viewer v){
         Cylinder c= new Cylinder(0,0,0,laenge,0,0);
-        c.setRadius(.2);
+        c.setRadius(.5);
         v.addObject3D(c);
         c.setColor(153,153,153);
     }
