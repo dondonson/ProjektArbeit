@@ -1,17 +1,21 @@
+import inf.v3d.obj.Arrow;
 import inf.v3d.view.*;
 public class TestBalken {
     public static void main(String[] args) {
+
 
         //Menü
         System.out.println("Bitte geben Sie alle ihre Angaben in cm ein");
         //Erstellung vom Balken
         Balken b1 = new Balken(Tastatur.liesDouble("Welche Größe hat der Balken ? "));
+        Viewer v = new Viewer();
+        b1.zu3D(v);
         //Auswahl
         System.out.println("Welche Art von Last wirkt auf dem Balken ?");
         System.out.println("Punktlast = 1");
         System.out.println("Gleichlasten = 2");
         System.out.println("Dreiecklasten = 3");
-        System.out.println("Keine = 4");
+
 
         int n=Tastatur.liesInt("Bitte wählen sie die Entschprechende Zahl aus ");
         if(n !=1&&n !=2&&n !=3){do {
@@ -52,7 +56,13 @@ public class TestBalken {
             } else {
                 System .out.println("Die Querkraft beträgt von 0 bis " + p[0].getOrt() + " +" + p[0].getKraft() + " von " + p[0].getOrt() + " bis " + p[1].getOrt() + " 0 und von " + p[1].getOrt() + " bis zum ende des Balkens -" + p[1].getKraft());
             }
-
+            //Visualisierung
+            if (mengePunktkraefte == 1) {
+                p[0].zu3D(v);
+            } else {
+                p[0].zu3D(v);
+                p[1].zu3D(v);
+            }
         }
 
         //Gleichlast
@@ -81,8 +91,6 @@ public class TestBalken {
             System.out.println("Auflagerkraft 1 ist "+ak1+" und Auflagerkraft 2 ist "+ak2);
         }
 
-        Viewer v = new Viewer();
-        b1.zu3D(v);
         v.setVisible(true);
 
     }
