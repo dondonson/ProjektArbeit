@@ -1,3 +1,4 @@
+import inf.v3d.view.*;
 public class TestBalken {
     public static void main(String[] args) {
 
@@ -13,6 +14,10 @@ public class TestBalken {
         System.out.println("Keine = 4");
 
         int n=Tastatur.liesInt("Bitte wählen sie die Entschprechende Zahl aus ");
+        if(n !=1&&n !=2&&n !=3){do {
+            System.out.println("Ungültige Option! Bitte gib eine gültige Option ein.");
+            n = Tastatur.liesInt("Bitte wählen sie die Entschprechende Zahl aus ");
+        } while (n !=1&&n !=2&&n !=3);}
 
         //Punktlast
         if(n==1) {
@@ -78,7 +83,9 @@ public class TestBalken {
         else{
             return;
         }
+        Viewer v = new Viewer();
+        b1.zu3D(v);
+        v.setVisible(true);
 
     }
-
 }
