@@ -19,6 +19,9 @@ public class DreieckLast {
         ausrichtung=a;
     }
     //Methoden
+    public double berechnelange(){
+        return endpunkt-anfangspunkt;
+    }
     public double BerechneResultierendeStandort(){
         if(ausrichtung=="ja"||ausrichtung=="Ja"){
             return (anfangspunkt + endpunkt) * 2 / 3;
@@ -37,11 +40,7 @@ public class DreieckLast {
     //noch nocht ganz ausgereift
     public void zu3D(Viewer v){
 
-        Text t1= new Text(""+kraft);
 
-        v.addObject3D(t1);
-        t1.setColor("red");
-        t1.setOrigin(laenge+1,4,0);
     }
 
 }

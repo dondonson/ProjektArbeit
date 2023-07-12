@@ -30,6 +30,7 @@ public class PunktLast {
     public void setKraft(double kraft) {
         this.kraft = kraft;
     }
+
     //Visualiesierug der Last
     public void zu3D(Viewer v){
         Arrow a1 = new Arrow(ort,4,0,ort,0.1,0);

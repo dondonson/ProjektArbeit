@@ -1,4 +1,5 @@
 import inf.v3d.obj.Arrow;
+import inf.v3d.obj.Text;
 import inf.v3d.view.*;
 public class TestBalken {
     public static void main(String[] args) {
@@ -63,6 +64,14 @@ public class TestBalken {
                 p[0].zu3D(v);
                 p[1].zu3D(v);
             }
+            Text tak1 = new Text("" + ak1);
+            v.addObject3D(tak1);
+            tak1.setColor("blue");
+            tak1.setOrigin(1, -4, 0);
+            Text tak2 = new Text("" + ak2);
+            v.addObject3D(tak2);
+            tak2.setColor("blue");
+            tak2.setOrigin(b1.laenge + 1, -4, 0);
         }
 
         //Gleichlast
@@ -84,16 +93,41 @@ public class TestBalken {
             }
             //Visualisierung
             g.zu3D(v);
+            Text tak1 = new Text("" + ak1);
+            v.addObject3D(tak1);
+            tak1.setColor("blue");
+            tak1.setOrigin(1, -4, 0);
+            Text tak2 = new Text("" + ak2);
+            v.addObject3D(tak2);
+            tak2.setColor("blue");
+            tak2.setOrigin(b1.laenge + 1, -4, 0);
 
-        }
-        else if(n==3){
-            DreieckLast d1 = new DreieckLast(Tastatur.liesDouble("Auf Welche länge des Balkens beginnt die Dreiecklast ? "),Tastatur.liesDouble("Auf Welche länge des Balkens endet die Gleichlast ? "),Tastatur.liesDouble("Wie stark ist die Kraft der Last" ),Tastatur.liesString("Wird das Dreieck größer ?"));
-            double ak1= d1.BerechneResultierendeStandort()/ b1.laenge*d1.BerechneResultierende();
-            double ak2= d1.BerechneResultierende()-ak1;
-            System.out.println("Auflagerkraft 1 ist "+ak1+" und Auflagerkraft 2 ist "+ak2);
-        }
+        } else if (n == 3) {
+            DreieckLast d1 = new DreieckLast(Tastatur.liesDouble("Auf Welche länge des Balkens beginnt die Dreiecklast ? "), Tastatur.liesDouble("Auf Welche länge des Balkens endet die Dreiecklast ? "), Tastatur.liesDouble("Wie stark ist die Kraft der Last ? "), false);
+            //Resultierende funktioniert nicht mehr
+            double ak1 = d1.BerechneResultierendeStandort() / b1.laenge * d1.BerechneResultierende();
+            double ak2 = d1.BerechneResultierende() - ak1;
+            System.out.println("Auflagerkraft 1 ist " + ak1 + " und Auflagerkraft 2 ist " + ak2);
 
-        v.setVisible(true);
+            d1.zu3D(v);
+            Text tak1 = new Text("" + ak1);
+            v.addObject3D(tak1);
+            tak1.setColor("blue");
+            tak1.setOrigin(1, -4, 0);
+            Text tak2 = new Text("" + ak2);
+            v.addObject3D(tak2);
+            tak2.setColor("blue");
+            tak2.setOrigin(b1.laenge + 1, -4, 0);
+        }
+        Arrow aak1 = new Arrow(0, -4, 0, 0, -0.1, 0);
+        Arrow aak2 = new Arrow(b1.laenge, -4, 0, b1.laenge, -0.1, 0);
+        aak1.setColor("blue");
+        aak2.setColor("blue");
+        v.addObject3D(aak1);
+        v.addObject3D(aak2);
+        aak1.setRadius(0.2);
+        aak2.setRadius(0.2);
+           v.setVisible(true);
 
     }
 }
