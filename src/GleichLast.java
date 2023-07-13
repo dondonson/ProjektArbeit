@@ -67,10 +67,10 @@ public class GleichLast {
         a2.setColor("red");
         a3.setColor("red");
         t1.setColor("red");
-        c1.setRadius(0.2);
-        a1.setRadius(0.2);
-        a2.setRadius(0.2);
-        a3.setRadius(0.2);
+        c1.setRadius(0.01);
+        a1.setRadius(0.01);
+        a2.setRadius(0.01);
+        a3.setRadius(0.01);
         t1.setOrigin(endpunkt+1,4,0);
     }
 }
