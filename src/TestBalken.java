@@ -1,10 +1,9 @@
-import inf.v3d.obj.Arrow;
-import inf.v3d.obj.Cylinder;
+
 import inf.v3d.obj.Text;
 import inf.v3d.view.*;
+import inf.v3d.obj.Polyline;
 public class TestBalken {
     public static void main(String[] args) {
-
 
         //Menü
         System.out.println("Bitte geben Sie alle ihre Angaben in cm ein");
@@ -36,7 +35,7 @@ public class TestBalken {
             int mengePunktkraefte = Tastatur.liesInt("Sollen 1 oder 2 Kräfte wirken ? ");
             PunktLast[] p = new PunktLast[mengePunktkraefte];
             for (int i = 0; i < p.length; i++) {
-                p[i] = new PunktLast(Tastatur.liesDouble("Auf Welche länge des Balkens befindet sich die " + (i + 1) + " Punktlast ? "), Tastatur.liesDouble("Wie stark ist die Kraft der Last ? "));
+                p[i] = new PunktLast(Tastatur.liesDouble("Auf Welche länge des Balkens befindet sich die " + (i + 1) + " Punktlast ? "), Tastatur.liesDouble("Wie stark ist die Kraft der Last ? "),b1,mengePunktkraefte);
                 resultierendeKraft = resultierendeKraft + p[i].getKraft();
             }
             if (mengePunktkraefte == 1){
@@ -60,36 +59,10 @@ public class TestBalken {
             }
             //Visualisierung
             if (mengePunktkraefte == 1) {
-                Arrow a1 = new Arrow(p[0].getOrt(), b1.laenge / 3, 0, p[0].getOrt(), 0.01* b1.laenge, 0);
-                a1.setColor("red");
-                v.addObject3D(a1);
-                a1.setRadius(0.01 * b1.laenge);
-                Text t1 = new Text("" + p[0].getKraft());
-                v.addObject3D(t1);
-                t1.setColor("red");
-                t1.setOrigin(p[0].getOrt() + 0.1, b1.laenge / 3, 0);
-                t1.setHeight(0.075 * b1.laenge);
+                p[0].zu3D(v);
             } else {
-                Arrow a1 = new Arrow(p[0].getOrt(), b1.laenge / 3, 0, p[0].getOrt(), 0.01* b1.laenge, 0);
-                a1.setColor("red");
-                v.addObject3D(a1);
-                a1.setRadius(0.01 * b1.laenge);
-                Text t1 = new Text("" + p[0].getKraft());
-                v.addObject3D(t1);
-                t1.setColor("red");
-                t1.setOrigin(p[0].getOrt() + 0.1, b1.laenge / 3, 0);
-                t1.setHeight(0.075 * b1.laenge);
-
-                Arrow a2 = new Arrow(p[1].getOrt(), b1.laenge / 3, 0, p[1].getOrt(), 0.01* b1.laenge, 0);
-                a2.setColor("red");
-                v.addObject3D(a2);
-                a2.setRadius(0.01 * b1.laenge);
-                Text t2 = new Text("" + p[1].getKraft());
-                v.addObject3D(t2);
-                t2.setColor("red");
-                t2.setOrigin(p[1].getOrt() + 0.1, b1.laenge / 3, 0);
-                t2.setHeight(0.075 * b1.laenge);
-
+                p[0].zu3D(v);
+                p[1].zu3D(v);
             }
             Text tak1 = new Text("" + ak1);
             v.addObject3D(tak1);
@@ -101,6 +74,25 @@ public class TestBalken {
             tak2.setOrigin(b1.laenge + 0.1, -b1.laenge / 3, 0);
             tak1.setHeight(0.075 * b1.laenge);
             tak2.setHeight(0.075 * b1.laenge);
+            //Momentverlauf
+            Polyline line;
+            line = new Polyline();
+            line.setVisible(true);
+            line.setColoringByData(true);
+            if (mengePunktkraefte == 1) {
+
+                line.setLinewidth(3);
+
+                line.addVertex(0, 0, 0);
+                line.addVertex(p[0].getOrt(), (p[0].getKraft() * p[0].getOrt() * (b1.laenge - p[0].getOrt())) / b1.laenge, 0);
+                line.addVertex(b1.laenge, 0, 0);
+            }else {
+                line.setLinewidth(4);
+                line.addVertex(0, 0, 0);
+                line.addVertex(p[0].getOrt(), 0, 0);
+                line.addVertex(p[1].getOrt(), 0, 0);
+                line.addVertex(b1.laenge, 0, 0);
+            }
         }
 
         //Gleichlast
@@ -120,98 +112,31 @@ public class TestBalken {
             } else {
                 return;
             }
-            //Visualisierung
-            Cylinder c1 = new Cylinder(g.getAnfangspunkt(), b1.laenge / 3, 0, g.getEndpunkt(), b1.laenge / 3, 0);
-            Arrow a1 = new Arrow(g.getAnfangspunkt(), b1.laenge / 3, 0, g.getAnfangspunkt(), 0.01* b1.laenge, 0);
-            Arrow a2 = new Arrow(g.getEndpunkt(), b1.laenge / 3, 0, g.getEndpunkt(), 0.01* b1.laenge, 0);
-            Arrow a3 = new Arrow(g.berechneResultierendeStandort(), b1.laenge / 3, 0, g.berechneResultierendeStandort(), 0.01* b1.laenge, 0);
-            Text t1 = new Text("" + g.getKraft());
-            v.addObject3D(c1);
-            v.addObject3D(a1);
-            v.addObject3D(a2);
-            v.addObject3D(a3);
-            v.addObject3D(t1);
-            c1.setColor("red");
-            a1.setColor("red");
-            a2.setColor("red");
-            a3.setColor("red");
-            t1.setColor("red");
-            c1.setRadius(0.01 * b1.laenge);
-            a1.setRadius(0.01 * b1.laenge);
-            a2.setRadius(0.01 * b1.laenge);
-            a3.setRadius(0.01 * b1.laenge);
-            t1.setOrigin(g.getEndpunkt() + 0.1, b1.laenge / 3, 0);
-            t1.setHeight(0.075 * b1.laenge);
-
-            Text tak1 = new Text("" + ak1);
-            v.addObject3D(tak1);
-            tak1.setColor("blue");
-            tak1.setOrigin(0.1, -b1.laenge / 3, 0);
-            Text tak2 = new Text("" + ak2);
-            v.addObject3D(tak2);
-            tak2.setColor("blue");
-            tak2.setOrigin(b1.laenge + 0.1, -b1.laenge / 3, 0);
-            tak1.setHeight(0.075 * b1.laenge);
-            tak2.setHeight(0.075 * b1.laenge);
+            //Momentverlauf
+            Polyline line;
+            line = new Polyline();
+            line.setVisible(true);
+            line.setColoringByData(true);
+            if (g.getAnfangspunkt() == 0&&g.getEndpunkt() ==b1.laenge) {
+                line.setLinewidth(10);
+                for (int i = 0; i < 6; i++) {
+                    line.addVertex((i / 10) * b1.laenge, (i / 5) * (g.getKraft() * Math.pow(b1.laenge, 2)) / 8, 0);
+                }
+                for (int i = 6; i < 11; i++) {
+                    line.addVertex((i / 10) * b1.laenge, (10 - i / 5) * (g.getKraft() * Math.pow(b1.laenge, 2)) / 8, 0);
+                }
+                //Visualisierung
+                g.zu3D(v);
+            }
 
         } else if (n == 3) {
-            DreieckLast d1 = new DreieckLast(Tastatur.liesDouble("Auf Welche länge des Balkens beginnt die Dreiecklast ? "), Tastatur.liesDouble("Auf Welche länge des Balkens endet die Dreiecklast ? "), Tastatur.liesDouble("Wie stark ist die Kraft der Last ? "), false);
-            //Resultierende funktioniert nicht mehr
-            double ak1 = d1.BerechneResultierendeStandort() / b1.laenge * d1.BerechneResultierende();
-            double ak2 = d1.BerechneResultierende() - ak1;
-            System.out.println("Auflagerkraft 1 ist " + ak1 + " und Auflagerkraft 2 ist " + ak2);
-
-            if (d1.ausrichtung = true) {
-                Cylinder c1 = new Cylinder(d1.getAnfangspunkt(), 0, 0, d1.getEndpunkt(), b1.laenge/3, 0);
-                Arrow a1 = new Arrow(d1.getEndpunkt(), b1.laenge/3, 0, d1.getEndpunkt(), 0.01* b1.laenge, 0);
-                v.addObject3D(a1);
-                a1.setColor("red");
-                a1.setRadius(0.01* b1.laenge);
-                v.addObject3D(c1);
-                c1.setColor("red");
-                c1.setRadius(0.01* b1.laenge);
-            } else {
-                Cylinder c1 = new Cylinder(d1.getAnfangspunkt(), b1.laenge/3, 0, d1.getEndpunkt(), 0, 0);
-                Arrow a1 = new Arrow(d1.getAnfangspunkt(), b1.laenge/3, 0, d1.getAnfangspunkt(), 0.01* b1.laenge, 0);
-                v.addObject3D(a1);
-                a1.setColor("red");
-                a1.setRadius(0.01* b1.laenge);
-                v.addObject3D(c1);
-                c1.setColor("red");
-                c1.setRadius(0.01* b1.laenge);
-            }
-            Arrow a2 = new Arrow(d1.berechnelange() / 2 + d1.getAnfangspunkt(), b1.laenge/6, 0, d1.berechnelange() / 2 + d1.getAnfangspunkt(), 0.01* b1.laenge, 0);
-            v.addObject3D(a2);
-            a2.setColor("red");
-            a2.setRadius(0.01* b1.laenge);
-            Text t1 = new Text("" + d1.getKraft());
-            v.addObject3D(t1);
-            t1.setColor("red");
-            t1.setOrigin(d1.getEndpunkt() + 0.1, b1.laenge/3, 0);
-            t1.setHeight(0.075 * b1.laenge);
-            Text tak1 = new Text("" + ak1);
-            v.addObject3D(tak1);
-            tak1.setColor("blue");
-            tak1.setOrigin(0.1, -b1.laenge / 3, 0);
-            Text tak2 = new Text("" + ak2);
-            v.addObject3D(tak2);
-            tak2.setColor("blue");
-            tak2.setOrigin(b1.laenge + 0.1, -b1.laenge / 3, 0);
-            tak1.setHeight(0.075 * b1.laenge);
-            tak2.setHeight(0.075 * b1.laenge);
+            DreieckLast d1 = new DreieckLast(Tastatur.liesDouble("Auf Welche länge des Balkens beginnt die Dreiecklast ? "), Tastatur.liesDouble("Auf Welche länge des Balkens endet die Dreiecklast ? "), Tastatur.liesDouble("Wie stark ist die Kraft der Last ? "), false,b1);
+            //Auflagerkräfte
+            System.out.println("Auflagerkraft 1 ist " + d1.berechneAuflagerkraft1() + " und Auflagerkraft 2 ist " + d1.berechneAuflagerkraft2());
+            //Visualiesierung
+            d1.zu3D(v);
         }
-
-
-
-    Arrow aak1 = new Arrow(0, -b1.laenge / 3, 0, 0, -0.01* b1.laenge, 0);
-    Arrow aak2 = new Arrow(b1.laenge, -b1.laenge / 3, 0, b1.laenge, -0.01* b1.laenge, 0);
-        aak1.setColor("blue");
-        aak2.setColor("blue");
-        v.addObject3D(aak1);
-        v.addObject3D(aak2);
-        aak1.setRadius(0.01*b1.laenge);
-        aak2.setRadius(0.01*b1.laenge);
         v.setVisible(true);
-}
     }
+}
 
