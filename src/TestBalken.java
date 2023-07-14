@@ -74,6 +74,25 @@ public class TestBalken {
             v.addObject3D(tak2);
             tak2.setColor("blue");
             tak2.setOrigin(b1.laenge + 1, -4, 0);
+         //Momentverlauf
+            Polyline line;
+            line = new Polyline();
+            line.setVisible(true);
+            line.setColoringByData(true);
+            if (mengePunktkraefte == 1) {
+
+                line.setLinewidth(3);
+
+                line.addVertex(0, 0, 0);
+                line.addVertex(p[0].getOrt(), (p[1].getKraft() * p[0].getOrt() * (b1.laenge - p[0].getOrt())) / b1.laenge, 0);
+                line.addVertex(b1.laenge, 0, 0);
+            }else {
+                line.setLinewidth(4);
+                line.addVertex(0, 0, 0);
+                line.addVertex(p[0].getOrt(), 0, 0);
+                line.addVertex(p[1].getOrt(), 0, 0);
+                line.addVertex(b1.laenge, 0, 0);
+            }
         }
 
         //Gleichlast
@@ -95,6 +114,23 @@ public class TestBalken {
                 double B = g.getKraft() * g.berechnelange() - A;
                 System.out.println("Die Querkraft beträgt bis " + g.getAnfangspunkt() + " " + A + "und fällt dann linear auf " + B + " am Punkt " + g.getEndpunkt() + " und bleibt stetig bis zum ende des Balkens");
             }
+            //Momentverlauf
+            Polyline line;
+            line = new Polyline();
+            line.setVisible(true);
+            line.setColoringByData(true);
+            if (g.getAnfangspunkt() == 0&&g.getEndpunkt() ==b1.laenge){
+                line.setLinewidth(10);
+                for(int i= 0; i<6;i++) {
+                    line.addVertex((i/10)*b1.laenge, (i/5)*(g.getKraft()*Math.pow(b1.laenge,2))/8, 0);
+                }
+                for(int i= 6; i<11;i++)
+                {
+                    line.addVertex((i/10)*b1.laenge, (10-i/5)*(g.getKraft()*Math.pow(b1.laenge,2))/8, 0);
+                }
+
+            
+            
             //Visualisierung
             g.zu3D(v);
             Text tak1 = new Text("" + ak1);
