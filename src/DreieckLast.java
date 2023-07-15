@@ -1,4 +1,52 @@
-   public double berechneAuflagerkraft1(){
+import inf.v3d.obj.Arrow;
+import inf.v3d.obj.Cylinder;
+import inf.v3d.obj.Text;
+import inf.v3d.view.Viewer;
+
+public class DreieckLast {
+    //Attribute
+    private double anfangspunkt;
+    private double endpunkt;
+    double kraft;
+    boolean ausrichtung;
+    private Balken balken;
+
+
+    //Konstruktor
+
+    public DreieckLast(double ap,double ep, double k, boolean a,Balken b){
+        anfangspunkt=ap;
+        endpunkt=ep;
+        kraft=k;
+        ausrichtung=a;
+        balken=b;
+    }
+    //Methoden
+    public double berechnelange(){
+        return endpunkt-anfangspunkt;
+    }
+    public double BerechneResultierendeStandort(){
+        if(ausrichtung = true){
+            return (berechnelange()) * 2 / 3;
+        } else {
+            return (berechnelange()) * 1 / 3;
+        }
+    }
+    public double getAnfangspunkt() {
+        return anfangspunkt;
+    }
+
+    public double getEndpunkt() {
+        return endpunkt;
+    }
+    public double getKraft() {
+        return kraft;
+    }
+
+    public double berechneResultierende(){
+        return berechnelange()*0.5*kraft;
+    }
+    public double berechneAuflagerkraft1(){
         double ak1= BerechneResultierendeStandort() / balken.laenge * berechneResultierende();
         return ak1;
     }
