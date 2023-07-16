@@ -7,7 +7,7 @@ public class Balken {
     //Konstruktor
     //bl=Balken Lange
     public Balken(double bl){
-    laenge=bl;
+        laenge=bl;
     }
     public void zu3D(Viewer v){
         Cylinder c= new Cylinder(0,0,0,laenge,0,0);

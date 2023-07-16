@@ -48,13 +48,13 @@ public class PunktLast {
     //Visualiesierug der Last
     public void zu3D(Viewer v){
         Arrow a1 = new Arrow(ort, balken.laenge / 3, 0, ort, 0.01* balken.laenge, 0);
-                a1.setColor("red");
-                v.addObject3D(a1);
-                a1.setRadius(0.01 * balken.laenge);
-                Text t1 = new Text("" + kraft);
-                v.addObject3D(t1);
-                t1.setColor("red");
-                t1.setOrigin(ort + 0.1, balken.laenge / 3, 0);
-                t1.setHeight(0.075 * balken.laenge);
+        a1.setColor("red");
+        v.addObject3D(a1);
+        a1.setRadius(0.01 * balken.laenge);
+        Text t1 = new Text("" + kraft);
+        v.addObject3D(t1);
+        t1.setColor("red");
+        t1.setOrigin(ort + 0.1, balken.laenge / 3, 0);
+        t1.setHeight(0.075 * balken.laenge);
     }
 }

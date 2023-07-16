@@ -29,6 +29,16 @@ public class GleichLast {
         return berechnelange()*kraft;
     }
 
+    public double berechneAuflagerkraft1(){
+        double ak1= berechneResultierendeStandort() / balken.laenge * berechneResultierende();
+        return ak1;
+    }
+    public double berechneAuflagerkraft2(){
+        double ak2= berechneResultierende() - berechneAuflagerkraft1();
+        return ak2;
+    }
+    //Visualisierung
+
     public double getAnfangspunkt() {
         return anfangspunkt;
     }
@@ -52,15 +62,14 @@ public class GleichLast {
     public void setKraft(double kraft) {
         this.kraft = kraft;
     }
-    public double berechneAuflagerkraft1(){
-       double ak1= berechneResultierendeStandort() / balken.laenge * berechneResultierende();
-       return ak1;
+
+    public Balken getBalken() {
+        return balken;
     }
-    public double berechneAuflagerkraft2(){
-        double ak2= berechneResultierende() - berechneAuflagerkraft1();
-        return ak2;
+
+    public void setBalken(Balken balken) {
+        this.balken = balken;
     }
-    //Visualisierung
 
     public void zu3D(Viewer v) {
         Cylinder c1 = new Cylinder(anfangspunkt, balken.laenge / 3, 0, endpunkt, balken.laenge / 3, 0);
@@ -94,5 +103,8 @@ public class GleichLast {
         tak2.setOrigin(balken.laenge + 0.1, -balken.laenge / 3, 0);
         tak1.setHeight(0.075 * balken.laenge);
         tak2.setHeight(0.075 * balken.laenge);
+
+
+
     }
 }
