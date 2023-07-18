@@ -3,6 +3,9 @@ import inf.v3d.obj.Cylinder;
 import inf.v3d.obj.Text;
 import inf.v3d.view.Viewer;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 public class GleichLast {
     //Attribute
     private double anfangspunkt;
@@ -70,6 +73,12 @@ public class GleichLast {
     public void setBalken(Balken balken) {
         this.balken = balken;
     }
+    public static double runden(double wert, int stellen){
+        if (stellen <0) throw new IllegalArgumentException();
+        BigDecimal bd = BigDecimal.valueOf(wert);
+        bd = bd.setScale(stellen, RoundingMode.HALF_UP);
+        return bd.doubleValue();
+    }
 
     public void zu3D(Viewer v) {
         Cylinder c1 = new Cylinder(anfangspunkt, balken.laenge / 3, 0, endpunkt, balken.laenge / 3, 0);
@@ -93,11 +102,11 @@ public class GleichLast {
         a3.setRadius(0.01 * balken.laenge);
         t1.setOrigin(endpunkt + 0.1, balken.laenge / 3, 0);
         t1.setHeight(0.075 * balken.laenge);
-        Text tak1 = new Text("" + berechneAuflagerkraft1());
+        Text tak1 = new Text("" + runden(berechneAuflagerkraft1(),3));
         v.addObject3D(tak1);
         tak1.setColor("blue");
         tak1.setOrigin(0.1, -balken.laenge / 3, 0);
-        Text tak2 = new Text("" + berechneAuflagerkraft2());
+        Text tak2 = new Text("" + runden(berechneAuflagerkraft2(),3));
         v.addObject3D(tak2);
         tak2.setColor("blue");
         tak2.setOrigin(balken.laenge + 0.1, -balken.laenge / 3, 0);
