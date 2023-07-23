@@ -9,6 +9,8 @@ public class Balken {
     public Balken(double bl){
         laenge=bl;
     }
+    //Visualiesierung des Balken 
+    //Alle Werte sind an die Lange des Balken gebunden damit die Visualiesierung immer ungefähr gleich aussieht
     public void zu3D(Viewer v){
         Cylinder c= new Cylinder(0,0,0,laenge,0,0);
         c.setRadius(.02*laenge);
