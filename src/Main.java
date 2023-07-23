@@ -40,7 +40,7 @@ public class Main {
             int mengePunktkraefte = Tastatur.liesInt("Wie viele Kräfte sollen Berechnet werden ? ");
             PunktLast[] p = new PunktLast[mengePunktkraefte];
             for (int i = 0; i < p.length; i++) {
-                p[i] = new PunktLast(Tastatur.liesDouble("Auf Welche länge des Balkens befindet sich die " + (i + 1) + " Punktlast ? "), Tastatur.liesDouble("Wie stark ist die Kraft der Last ? "), b,mengePunktkraefte);
+                p[i] = new PunktLast(Tastatur.liesDouble("Auf Welche länge des Balkens befindet sich die " + (i + 1) + " Punktlast ? "), Tastatur.liesDouble("Wie stark ist die Kraft der Last ? "), b);
                 resultierendeKraft = resultierendeKraft + p[i].getKraft();
             }
 
