@@ -3,10 +3,14 @@ import inf.v3d.obj.Polyline;
 import inf.v3d.obj.Text;
 import inf.v3d.view.*;
 import inf.v3d.obj.Polyline;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+
 public class TestBalken {
     public static void main(String[] args) {
         Viewer v = new Viewer();
-
+        double ak1=0;
+        double ak2=0;
         //Menü
         System.out.println("Bitte geben Sie alle ihre Angaben in Metern ein");
         //Erstellung vom Balken
@@ -49,8 +53,7 @@ public class TestBalken {
             }
 
             //Auflagerkräfte berechnen mit neuer Array
-            double ak1 = 0;
-            double ak2 = 0;
+           
             for (int i = 0; i < p.length; i++) {
                 ak1 = ak1 + (b1.laenge-p[i].getOrt())*p[i].getKraft();
                 ak2 = ak2 + p[i].getOrt()*p[i].getKraft();
@@ -124,7 +127,10 @@ public class TestBalken {
         //Gleichlast
         else if (n == 2) {
             GleichLast g = new GleichLast(Tastatur.liesDouble("Auf Welche länge des Balkens beginnt die Gleichlast ? "), Tastatur.liesDouble("Auf Welche länge des Balkens endet die Gleichlast ? "), Tastatur.liesDouble("Wie stark ist die Kraft der Last ? "),b1);
-            System.out.println("Auflagerkraft 1 ist " + g.berechneAuflagerkraft1() + " und Auflagerkraft 2 ist " + g.berechneAuflagerkraft2());
+             //Auflagerkräfte
+            ak1=g.berechneAuflagerkraft1();
+            ak2=g.berechneAuflagerkraft2();
+            System.out.println("Auflagerkraft 1 ist " + ak1 + " und Auflagerkraft 2 ist " + ak2);
 
             //Querkraft
             if (g.berechnelange() == 0) {
@@ -177,10 +183,35 @@ public class TestBalken {
 
         } else if (n == 3) {
             DreieckLast d1 = new DreieckLast(Tastatur.liesDouble("Auf Welche länge des Balkens beginnt die Dreiecklast ? "), Tastatur.liesDouble("Auf Welche länge des Balkens endet die Dreiecklast ? "), Tastatur.liesDouble("Wie stark ist die Kraft der Last ? "), false,b1);
-            //Auflagerkräfte
-            System.out.println("Auflagerkraft 1 ist " + d1.berechneAuflagerkraft1() + " und Auflagerkraft 2 ist " + d1.berechneAuflagerkraft2());
+          
+           //Auflagerkräfte
+            ak1 = d1.berechneAuflagerkraft1();
+            ak2 = d1.berechneAuflagerkraft2();
+            System.out.println("Auflagerkraft 1 ist " + ak1 + " und Auflagerkraft 2 ist " + ak2); 
             //Visualiesierung
             d1.zu3D(v);
+        }
+        System.out.println("Wollen sie die Ergebnisse speichern?");
+        System.out.println("Ja = 1");
+        System.out.println("Nein = 2");
+        int t = Tastatur.liesInt("Bitte wählen sie die Entschprechende Zahl aus ");
+        if (t != 1 && t != 2 ) {
+            do {
+                System.out.println("Ungültige Option! Bitte gib eine gültige Option ein.");
+                t = Tastatur.liesInt("Bitte wählen sie die Entschprechende Zahl aus ");
+            } while (t != 1 && t != 2 );
+        }
+        if (t==1) {
+            try {
+                FileWriter fw = new FileWriter("Balken.txt");
+                PrintWriter out = new PrintWriter(fw);
+                out.println("Balken der Lange " + b1.laenge);
+                out.println("Auflagerkraft 1 ist " + ak1 + " und Auflagerkraft 2 ist " + ak2);
+                out.close();
+                fw.close();
+            } catch (Exception e) {
+                System.out.println("Fehler beim Schreiben!");
+            }
         }
         v.setVisible(true);
     }
