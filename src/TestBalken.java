@@ -181,13 +181,15 @@ public class TestBalken {
             //Visualisierung
             g.zu3D(v);
 
-        } else if (n == 3) {
-            DreieckLast d1 = new DreieckLast(Tastatur.liesDouble("Auf Welche länge des Balkens beginnt die Dreiecklast ? "), Tastatur.liesDouble("Auf Welche länge des Balkens endet die Dreiecklast ? "), Tastatur.liesDouble("Wie stark ist die Kraft der Last ? "), false,b1);
-          
-           //Auflagerkräfte
+         } else if (n == 3) {
+            System.out.println("Wird die Dreieckslast Größer oder Kleiner von links nach rechts? ");
+            System.out.println("Größer = 1");
+            System.out.println("Kleiner = 2");
+            DreieckLast d1 = new DreieckLast(Tastatur.liesInt(),Tastatur.liesDouble("Auf Welche länge des Balkens beginnt die Dreiecklast ? "), Tastatur.liesDouble("Auf Welche länge des Balkens endet die Dreiecklast ? "), Tastatur.liesDouble("Wie stark ist die Kraft der Last ? "),b1);
+            //Auflagerkräfte
             ak1 = d1.berechneAuflagerkraft1();
             ak2 = d1.berechneAuflagerkraft2();
-            System.out.println("Auflagerkraft 1 ist " + ak1 + " und Auflagerkraft 2 ist " + ak2); 
+            System.out.println("Auflagerkraft 1 ist " + ak1 + " und Auflagerkraft 2 ist " + ak2);
             //Visualiesierung
             d1.zu3D(v);
         }
