@@ -57,6 +57,7 @@ public class DreieckLast {
         double ak2= berechneResultierende() - berechneAuflagerkraft1();
         return ak2;
     }
+    //Die Methode Runden ist für die Visualiesierung Wichtig da sonst die Werte der Kräfte teilweise zu viele Nachkommastellen haben wodurch sie zu viel Platz einnehmen
     public static double runden(double wert, int stellen){
         if (stellen <0) throw new IllegalArgumentException();
         BigDecimal bd = BigDecimal.valueOf(wert);
@@ -64,8 +65,8 @@ public class DreieckLast {
         return bd.doubleValue();
     }
     //Visualisierung
-
-
+    //C1 ist der Cyclinder der die Pfeile zusammen hält
+    //Verschiedene Farben um unterschiedliche Kräfte zu Visualiesieren 
     public void zu3D(Viewer v){
         Cylinder c1;
         Arrow a1;
