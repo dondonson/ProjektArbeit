@@ -2,7 +2,6 @@ import inf.v3d.obj.Arrow;
 import inf.v3d.obj.Cylinder;
 import inf.v3d.obj.Text;
 import inf.v3d.view.Viewer;
-
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
@@ -14,7 +13,6 @@ public class GleichLast {
     private Balken balken;
 
     //Konstruktor
-    //
     public GleichLast(double gla,double gle, double k,Balken b){
         anfangspunkt=gla;
         endpunkt=gle;
@@ -31,7 +29,6 @@ public class GleichLast {
     public double berechneResultierende(){
         return berechnelange()*kraft;
     }
-
     public double berechneAuflagerkraft1(){
         double ak1= berechneResultierendeStandort() / balken.laenge * berechneResultierende();
         return ak1;
@@ -40,8 +37,6 @@ public class GleichLast {
         double ak2= berechneResultierende() - berechneAuflagerkraft1();
         return ak2;
     }
-    //Visualisierung
-
     public double getAnfangspunkt() {
         return anfangspunkt;
     }
@@ -53,25 +48,8 @@ public class GleichLast {
     public double getEndpunkt() {
         return endpunkt;
     }
-
-    public void setEndpunkt(double endpunkt) {
-        this.endpunkt = endpunkt;
-    }
-
     public double getKraft() {
         return kraft;
-    }
-
-    public void setKraft(double kraft) {
-        this.kraft = kraft;
-    }
-
-    public Balken getBalken() {
-        return balken;
-    }
-
-    public void setBalken(Balken balken) {
-        this.balken = balken;
     }
     public static double runden(double wert, int stellen){
         if (stellen <0) throw new IllegalArgumentException();
@@ -79,7 +57,7 @@ public class GleichLast {
         bd = bd.setScale(stellen, RoundingMode.HALF_UP);
         return bd.doubleValue();
     }
-
+    //Visualisierung
     public void zu3D(Viewer v) {
         Cylinder c1 = new Cylinder(anfangspunkt, balken.laenge / 3, 0, endpunkt, balken.laenge / 3, 0);
         Arrow a1 = new Arrow(anfangspunkt, balken.laenge / 3, 0, anfangspunkt, 0.01 * balken.laenge, 0);
@@ -112,8 +90,5 @@ public class GleichLast {
         tak2.setOrigin(balken.laenge + 0.1, -balken.laenge / 3, 0);
         tak1.setHeight(0.075 * balken.laenge);
         tak2.setHeight(0.075 * balken.laenge);
-
-
-
     }
 }
