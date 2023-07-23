@@ -8,20 +8,20 @@ import java.math.RoundingMode;
 
 public class DreieckLast {
     //Attribute
+    int ausrichtung;
     private double anfangspunkt;
     private double endpunkt;
     double kraft;
-    boolean ausrichtung;
     private Balken balken;
 
 
     //Konstruktor
 
-    public DreieckLast(double ap,double ep, double k, boolean a,Balken b){
+    public DreieckLast(int a,double ap,double ep, double k,Balken b){
+        ausrichtung=a;
         anfangspunkt=ap;
         endpunkt=ep;
         kraft=k;
-        ausrichtung=a;
         balken=b;
     }
     //Methoden
@@ -29,7 +29,7 @@ public class DreieckLast {
         return endpunkt-anfangspunkt;
     }
     public double BerechneResultierendeStandort(){
-        if(ausrichtung = true){
+        if(ausrichtung == 1){
             return (berechnelange()) * 2 / 3;
         } else {
             return (berechnelange()) * 1 / 3;
@@ -70,7 +70,7 @@ public class DreieckLast {
         Cylinder c1;
         Arrow a1;
 
-        if (ausrichtung) {
+        if (ausrichtung==1) {
             c1 = new Cylinder(anfangspunkt, 0, 0, endpunkt, balken.laenge/3, 0);
             a1 = new Arrow(endpunkt, balken.laenge/3, 0, endpunkt, 0.01* balken.laenge, 0);
 
