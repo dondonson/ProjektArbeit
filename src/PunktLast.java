@@ -8,14 +8,12 @@ public class PunktLast {
     private double ort;
     private double kraft;
     private Balken balken;
-    private int menge;
 
     //Konstruktor
-    public PunktLast(double o,double k, Balken b,int m){
+    public PunktLast(double o,double k, Balken b){
         ort=o;
         kraft=k;
         balken=b;
-        menge=m;
     }
 
     //Getter und Setter
@@ -23,27 +21,9 @@ public class PunktLast {
         return ort;
     }
 
-    public void setOrt(double ort) {
-        this.ort = ort;
-    }
-
     public double getKraft() {
         return kraft;
     }
-
-    public void setKraft(double kraft) {
-        this.kraft = kraft;
-    }
-    /*Work in Progress
-    public double berechneResultierendeOrt(){
-        double resultierendeOrt;
-        if (menge == 1) {
-            resultierendeOrt = ort;
-        } else {
-            resultierendeOrt = p[0].getOrt() + (p[1].getKraft() / resultierendeKraft) * (p[1].getOrt() - p[0].getOrt());
-        }
-        return resultierendeOrt;
-    }*/
 
     //Visualiesierug der Last
     public void zu3D(Viewer v){
