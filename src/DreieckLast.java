@@ -2,18 +2,16 @@ import inf.v3d.obj.Arrow;
 import inf.v3d.obj.Cylinder;
 import inf.v3d.obj.Text;
 import inf.v3d.view.Viewer;
-
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 public class DreieckLast {
     //Attribute
-    int ausrichtung;
+    private int ausrichtung;
     private double anfangspunkt;
     private double endpunkt;
     double kraft;
     private Balken balken;
-
 
     //Konstruktor
 
@@ -35,17 +33,6 @@ public class DreieckLast {
             return (berechnelange()) * 1 / 3;
         }
     }
-    public double getAnfangspunkt() {
-        return anfangspunkt;
-    }
-
-    public double getEndpunkt() {
-        return endpunkt;
-    }
-    public double getKraft() {
-        return kraft;
-    }
-
     public double berechneResultierende(){
         return berechnelange()*0.5*kraft;
     }
@@ -105,5 +92,4 @@ public class DreieckLast {
         tak1.setHeight(0.075 * balken.laenge);
         tak2.setHeight(0.075 * balken.laenge);
     }
-
 }
