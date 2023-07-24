@@ -118,8 +118,8 @@ public class TestBalken {
             }else {
                 line.setLinewidth(4);
                 line.addVertex(0, 0, 0);
-                line.addVertex(p[0].getOrt(), 0, 0);
-                line.addVertex(p[1].getOrt(), 0, 0);
+                line.addVertex(p[0].getOrt(), p[0].getKraft(), 0);
+                line.addVertex(p[1].getOrt(), p[1].getKraft(), 0);
                 line.addVertex(b1.laenge, 0, 0);
             }
         }
