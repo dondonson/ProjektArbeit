@@ -6,6 +6,30 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 public class DreieckLast {
+    public double getKraft() {
+        return kraft;
+    }
+
+    public void setKraft(double kraft) {
+        this.kraft = kraft;
+    }
+
+    public double getAnfangspunkt() {
+        return anfangspunkt;
+    }
+
+    public double getEndpunkt() {
+        return endpunkt;
+    }
+
+    public void setEndpunkt(double endpunkt) {
+        this.endpunkt = endpunkt;
+    }
+
+    public void setAnfangspunkt(double anfangspunkt) {
+        this.anfangspunkt = anfangspunkt;
+    }
+
     //Attribute
     private int ausrichtung;
     private double anfangspunkt;
