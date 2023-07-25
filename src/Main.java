@@ -44,3 +44,19 @@ public class Main {
             momentverlaufG.addVertex(b.laenge,0,0);
             momentverlaufG.setColor("green");
             v.addObject3D(momentverlaufG);
+
+            //Dreieckslast
+            //Momentverlauf
+            Polyline momentverlaufD = new Polyline();
+            momentverlaufD.setVisible(true);
+            momentverlaufD.setLinewidth(5);
+            double Mmax = (d.getKraft()*Math.pow(d.berechnelange(),2))/(9*Math.sqrt(3)); //Maximales Moment
+
+            momentverlaufD.addVertex(0,0,0);
+            for (double i = 0; i <= d.berechnelange()+0.1;i = i+0.1){
+                momentverlaufD.addVertex(i, (1-(Math.pow(i,2)/Math.pow(b.laenge,2))*(ak1*i)),0);
+            }
+            momentverlaufD.setVisible(true);
+            momentverlaufD.setColor("green");
+            v.addObject3D(momentverlaufD);
+
