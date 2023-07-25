@@ -1,3 +1,8 @@
+//Gruppe 109 
+//Cedric Padeken 108022252630
+//Henrique Elia Novais 108022232164
+//Leon Lukas Grügelsberg ´108022248789
+
 import inf.v3d.obj.*;
 import inf.v3d.view.*;
 public class Balken {
