@@ -10,3 +10,5 @@ public class Main {
                 momentverlaufG.addVertex(i+(g.berechnelange()*(1/2)+g.getAnfangspunkt()), -1*(ak2*(b.laenge-(i+g.berechnelange()*(1/2)+g.getAnfangspunkt())) -((g.getEndpunkt()-(i/2+g.berechnelange()*(1/2)+g.getAnfangspunkt()))*g.getKraft()*(b.laenge-(g.berechnelange()*(1/2)+g.getAnfangspunkt()+i/2)))),0);
             }
 momentverlaufG.addVertex(g.getEndpunkt(), -1*Bb,0);
+
+    -1*(ak1*i - (i*g.getKraft()*(i*0.5)))
