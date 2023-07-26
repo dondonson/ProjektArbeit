@@ -159,19 +159,29 @@ public class Main {
             v.addObject3D(querkraftG);
 
             //Momentverlauf
-            Polyline line;
-            line = new Polyline();
-            line.setVisible(true);
-            line.setColoringByData(true);
-            if (g.getAnfangspunkt() == 0&&g.getEndpunkt() == b.laenge) {
-                line.setLinewidth(10);
-                for (int i = 0; i < 6; i++) {
-                    line.addVertex((i / 10) * b.laenge, (i / 5) * (g.getKraft() * Math.pow(b.laenge, 2)) / 8, 0);
-                }
-                for (int i = 6; i < 11; i++) {
-                    line.addVertex((i / 10) * b.laenge, (10 - i / 5) * (g.getKraft() * Math.pow(b.laenge, 2)) / 8, 0);
-                }
-                //Visualisierung
+               Polyline momentverlaufG = new Polyline();
+            momentverlaufG.setVisible(true);
+            momentverlaufG.setLinewidth(5);
+
+            double Aa = A*g.getAnfangspunkt();
+            double Bb = B*(b.laenge-g.getEndpunkt());
+            double Ap = g.getAnfangspunkt();
+            double Ep = g.getEndpunkt();
+
+
+            momentverlaufG.addVertex(0,0,0);
+            momentverlaufG.addVertex(Ap, -1*Aa,0);
+            for (double i = Ap; i <= Ep;i = i+0.1){
+                momentverlaufG.addVertex(i, -1*(ak1*i-(i-Ap)*g.getKraft()*((i-Ap)/2)+Ap),0);
+            }
+            momentverlaufG.addVertex(Ep, -1*Bb,0);
+            momentverlaufG.addVertex(b.laenge,0,0);
+
+            momentverlaufG.setColor("green");
+            v.addObject3D(momentverlaufG);
+             
+            
+            //Visualisierung
                 g.zu3D(v);
             }
 
