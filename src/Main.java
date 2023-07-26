@@ -48,5 +48,10 @@ momentverlaufG.addVertex(g.getEndpunkt(), -1*Bb,0);
                 momentverlaufG.addVertex(i, -1*(ak2*(b.laenge-i) -(b.laenge- g.getEndpunkt()+ (g.getEndpunkt()-i)/2)* (g.getEndpunkt()-i)* g.getKraft()),0);
             }
 
-
+  for (double i = Ap; i <= g.berechnelange()/2;i = i+0.1){
+                momentverlaufG.addVertex(i, -1*(ak1*i-(i-Ap)*g.getKraft()*((i-Ap)/2)+Ap),0);
+            }
+            for (double i = Ap+g.berechnelange()/2 ; i <= Ep+0.1;i = i+0.1){
+                momentverlaufG.addVertex(i, -1*(ak2*(b.laenge-i) -((b.laenge-Ep+(Ep-i)/2)*(i-Ap-g.berechnelange()/2)* g.getKraft())),0);
+            }
     
