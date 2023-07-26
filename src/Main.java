@@ -12,3 +12,13 @@ public class Main {
 momentverlaufG.addVertex(g.getEndpunkt(), -1*Bb,0);
 
     -1*(ak1*i - (i*g.getKraft()*(i*0.5)))
+
+
+          momentverlaufG.addVertex(0,0,0);
+
+            for (double i = 0; i <= b.laenge/2;i = i+0.1){
+                momentverlaufG.addVertex(i, -1*(ak1*i-i*g.getKraft()*i/2),0);
+            }
+            for (double i = 0 ; i <= b.laenge/2;i = i+0.1){
+                momentverlaufG.addVertex(i+b.laenge/2, -1*(ak2*(b.laenge/2-i) -((b.laenge/2-i)/2)*(b.laenge/2-i)* g.getKraft()),0);
+            }
