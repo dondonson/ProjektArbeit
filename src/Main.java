@@ -74,7 +74,7 @@ public class Main {
             drawquerkraftP.addVertex(0,ak1,0);
             drawquerkraftP.addVertex(p[0].getOrt(),ak1,0);
 
-            double qP[] = new double[p.length];
+            double[] qP = new double[p.length];
             double x = 0;
             for (int i = 0; i < mengePunktkraefte; i++){
                 drawquerkraftP.addVertex(p[i].getOrt(),ak1+x,0);
@@ -92,35 +92,38 @@ public class Main {
             v.addObject3D(drawquerkraftP);
 
             //Momentverlauf
-            Polyline line;
-            line = new Polyline();
-            line.setVisible(true);
-            line.setColoringByData(true);
-            if (mengePunktkraefte == 1) {
+            double lvm = 0; //lvm = leitvariable momentenverlauf
 
-                line.setLinewidth(3);
+            Polyline drawmomentP = new Polyline();
 
-                line.addVertex(0, 0, 0);
-                line.addVertex(p[0].getOrt(), (p[0].getKraft() * p[0].getOrt() * (b.laenge - p[0].getOrt())) / b.laenge, 0);
-                line.addVertex(b.laenge, 0, 0);
-            }else {
-                line.setLinewidth(4);
-                line.addVertex(0, 0, 0);
-                line.addVertex(p[0].getOrt(), 0, 0);
-                line.addVertex(p[1].getOrt(), 0, 0);
-                line.addVertex(b.laenge, 0, 0);
+            drawmomentP.addVertex(0,0,0);
+            drawmomentP.addVertex(p[0].getOrt(),ak1*p[0].getOrt(),0);
+            for (int i = 0; i < p.length; i++){
+                if (i<p.length-1){
+                    drawmomentP.addVertex(p[i].getOrt(), ak1*p[i].getOrt()+lvm, 0);
+                    lvm = lvm-p[i].getKraft()*(p[i+1].getOrt()-p[i].getOrt());
+                } else {
+                    drawmomentP.addVertex(p[i].getOrt(), ak1*p[i].getOrt()+lvm, 0);
+                    lvm = lvm-p[i].getKraft()*(b.laenge-p[i].getOrt());
+                }
             }
+            drawmomentP.addVertex(b.laenge, 0,0);
+
+            drawmomentP.setLinewidth(5);
+            drawmomentP.setVisible(true);
+            drawmomentP.setColor("green");
+            v.addObject3D(drawmomentP);
 
             //Visualisierung
             for (int i = 0;i<mengePunktkraefte;i++){
                 p[i].zu3D(v);
             }
 
-            Text tak1 = new Text("" + ak1);
+            Text tak1 = new Text(" " + ak1);
             v.addObject3D(tak1);
             tak1.setColor("blue");
             tak1.setOrigin(0.1, -b.laenge / 3, 0);
-            Text tak2 = new Text("" + ak2);
+            Text tak2 = new Text(" " + ak2);
             v.addObject3D(tak2);
             tak2.setColor("blue");
             tak2.setOrigin(b.laenge + 0.1, -b.laenge / 3, 0);
@@ -142,6 +145,9 @@ public class Main {
             double B = g.getKraft()*g.berechnelange()-A;
 
             Polyline querkraftG = new Polyline();
+            querkraftG.setLinewidth(5);
+            querkraftG.setVisible(true);
+            querkraftG.setColor("yellow");
 
             querkraftG.addVertex(0,0,0);
             querkraftG.addVertex(0, A, 0);
@@ -150,9 +156,6 @@ public class Main {
             querkraftG.addVertex(b.laenge, -B, 0);
             querkraftG.addVertex(b.laenge, 0,0);
 
-            querkraftG.setLinewidth(5);
-            querkraftG.setVisible(true);
-            querkraftG.setColoringByData(true);
             v.addObject3D(querkraftG);
 
             //Momentverlauf
@@ -181,6 +184,7 @@ public class Main {
             System.out.println("Größer = 1");
             System.out.println("Kleiner = 2");
             DreieckLast d = new DreieckLast(Tastatur.liesInt(),Tastatur.liesDouble("Auf Welche länge des Balkens beginnt die Dreiecklast ? "), Tastatur.liesDouble("Auf Welche länge des Balkens endet die Dreiecklast ? "), Tastatur.liesDouble("Wie stark ist die Kraft der Last ? "), b);
+
             //Auflagerkräfte
             ak1 = d.berechneAuflagerkraft1();
             ak2 = d.berechneAuflagerkraft2();
@@ -188,22 +192,55 @@ public class Main {
 
             //Querkraft
             Polyline drawquerkraftD = new Polyline();
+            drawquerkraftD.setLinewidth(5);
+            drawquerkraftD.setVisible(true);
+            drawquerkraftD.setColor("yellow");
 
             double A = (d.getKraft()/d.berechnelange())/2;
 
-            drawquerkraftD.addVertex(0,0,0);
-            drawquerkraftD.addVertex(0,ak1,0);
-            drawquerkraftD.addVertex(d.getAnfangspunkt(),ak1,0);
-            for (double i = 0; i <= d.berechnelange()+0.1;i = i+0.1){
-                drawquerkraftD.addVertex(d.getAnfangspunkt()+i, ak1 - A*Math.pow(i,2),0);
-            }
-            drawquerkraftD.addVertex(b.laenge, ak1 - A*Math.pow(d.berechnelange(), 2),0);
-            drawquerkraftD.addVertex(b.laenge, 0,0);
+            if (d.getAusrichtung() == 1) {
+                drawquerkraftD.addVertex(0, 0, 0);
+                drawquerkraftD.addVertex(0, ak1, 0);
+                drawquerkraftD.addVertex(d.getAnfangspunkt(), ak1, 0);
+                for (double i = 0; i <= d.berechnelange()+0.1; i = i + 0.1) {
+                    drawquerkraftD.addVertex(d.getAnfangspunkt() + i, ak1 - A * Math.pow(i, 2), 0);
 
-            drawquerkraftD.setLinewidth(5);
-            drawquerkraftD.setVisible(true);
-            drawquerkraftD.setColoringByData(true);
+                }
+                drawquerkraftD.addVertex(b.laenge, ak1 - A * Math.pow(d.berechnelange(), 2), 0);
+                drawquerkraftD.addVertex(b.laenge, 0, 0);
+            } else {
+                drawquerkraftD.addVertex(b.laenge, 0, 0);
+                drawquerkraftD.addVertex(b.laenge, -ak2, 0);
+                drawquerkraftD.addVertex(d.getEndpunkt(), -ak2, 0);
+                for (double i = 0; i <= d.berechnelange(); i = i + 0.1) {
+                    drawquerkraftD.addVertex(d.getEndpunkt() - i, -ak2 + A * Math.pow(i, 2), 0);
+                }
+                drawquerkraftD.addVertex(0, -ak2 + A * Math.pow(d.berechnelange(), 2), 0);
+                drawquerkraftD.addVertex(0, 0, 0);
+
+                drawquerkraftD.setLinewidth(5);
+                drawquerkraftD.setVisible(true);
+                drawquerkraftD.setColoringByData(true);
+            }
+
             v.addObject3D(drawquerkraftD);
+
+            //Momentverlauf
+            Polyline momentverlaufD = new Polyline();
+            momentverlaufD.setVisible(true);
+            momentverlaufD.setLinewidth(5);
+            momentverlaufD.setVisible(true);
+            momentverlaufD.setColor("green");
+
+            momentverlaufD.addVertex(0,0,0);
+            momentverlaufD.addVertex(d.getAnfangspunkt(),ak1*d.getAnfangspunkt()/(b.laenge*0.8), 0);
+            for (double i = 0; i <= d.berechnelange();i = i+0.1){
+                momentverlaufD.addVertex(i+ d.getAnfangspunkt(), (ak1*(i+d.getAnfangspunkt()) - (d.getKraft()/2*d.berechnelange())*Math.pow(i,2)*i/3)/(b.laenge*0.8),0);
+            }
+            momentverlaufD.addVertex(b.laenge, (ak1*b.laenge - (d.getKraft()/2*d.berechnelange())*Math.pow(d.berechnelange(),2)*d.berechnelange()/3)/(b.laenge*0.8),0);
+            momentverlaufD.addVertex(b.laenge, 0,0);
+
+            v.addObject3D(momentverlaufD);
 
             //Visualiesierung
             d.zu3D(v);

@@ -11,29 +11,6 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 public class DreieckLast {
-    public double getKraft() {
-        return kraft;
-    }
-
-    public void setKraft(double kraft) {
-        this.kraft = kraft;
-    }
-
-    public double getAnfangspunkt() {
-        return anfangspunkt;
-    }
-
-    public double getEndpunkt() {
-        return endpunkt;
-    }
-
-    public void setEndpunkt(double endpunkt) {
-        this.endpunkt = endpunkt;
-    }
-
-    public void setAnfangspunkt(double anfangspunkt) {
-        this.anfangspunkt = anfangspunkt;
-    }
 
     //Attribute
     private int ausrichtung;
@@ -57,20 +34,20 @@ public class DreieckLast {
     }
     public double BerechneResultierendeStandort(){
         if(ausrichtung == 1){
-            return (berechnelange()) * 2 / 3;
+            return ((berechnelange()) * 2 / 3) + anfangspunkt;
         } else {
-            return (berechnelange()) * 1 / 3;
+            return ((berechnelange()) * 1 / 3) + anfangspunkt;
         }
     }
     public double berechneResultierende(){
         return berechnelange()*0.5*kraft;
     }
     public double berechneAuflagerkraft1(){
-        double ak1= BerechneResultierendeStandort() / balken.laenge * berechneResultierende();
+        double ak1= berechneResultierende() - berechneAuflagerkraft2();
         return ak1;
     }
     public double berechneAuflagerkraft2(){
-        double ak2= berechneResultierende() - berechneAuflagerkraft1();
+        double ak2= BerechneResultierendeStandort() * berechneResultierende() / balken.laenge;
         return ak2;
     }
     //Die Methode Runden ist für die Visualiesierung Wichtig da sonst die Werte der Kräfte teilweise zu viele Nachkommastellen haben wodurch sie zu viel Platz einnehmen
@@ -120,5 +97,37 @@ public class DreieckLast {
         tak2.setOrigin(balken.laenge + 0.1, -balken.laenge / 3, 0);
         tak1.setHeight(0.075 * balken.laenge);
         tak2.setHeight(0.075 * balken.laenge);
+    }
+
+    public int getAusrichtung() {
+        return ausrichtung;
+    }
+
+    public void setAusrichtung(int ausrichtung) {
+        this.ausrichtung = ausrichtung;
+    }
+
+    public double getKraft() {
+        return kraft;
+    }
+
+    public void setKraft(double kraft) {
+        this.kraft = kraft;
+    }
+
+    public double getAnfangspunkt() {
+        return anfangspunkt;
+    }
+
+    public double getEndpunkt() {
+        return endpunkt;
+    }
+
+    public void setEndpunkt(double endpunkt) {
+        this.endpunkt = endpunkt;
+    }
+
+    public void setAnfangspunkt(double anfangspunkt) {
+        this.anfangspunkt = anfangspunkt;
     }
 }

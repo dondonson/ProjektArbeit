@@ -35,11 +35,11 @@ public class GleichLast {
         return berechnelange()*kraft;
     }
     public double berechneAuflagerkraft1(){
-        double ak1= berechneResultierendeStandort() / balken.laenge * berechneResultierende();
+        double ak1= berechneResultierende() - berechneAuflagerkraft2();
         return ak1;
     }
     public double berechneAuflagerkraft2(){
-        double ak2= berechneResultierende() - berechneAuflagerkraft1();
+        double ak2= berechneResultierendeStandort() / balken.laenge * berechneResultierende();
         return ak2;
     }
     public double getAnfangspunkt() {
