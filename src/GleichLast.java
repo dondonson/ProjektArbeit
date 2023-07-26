@@ -42,26 +42,7 @@ public class GleichLast {
         double ak2= berechneResultierendeStandort() / balken.laenge * berechneResultierende();
         return ak2;
     }
-    public double getAnfangspunkt() {
-        return anfangspunkt;
-    }
 
-    public void setAnfangspunkt(double anfangspunkt) {
-        this.anfangspunkt = anfangspunkt;
-    }
-
-    public double getEndpunkt() {
-        return endpunkt;
-    }
-    public double getKraft() {
-        return kraft;
-    }
-    public static double runden(double wert, int stellen){
-        if (stellen <0) throw new IllegalArgumentException();
-        BigDecimal bd = BigDecimal.valueOf(wert);
-        bd = bd.setScale(stellen, RoundingMode.HALF_UP);
-        return bd.doubleValue();
-    }
     //Visualisierung
     public void zu3D(Viewer v) {
         Cylinder c1 = new Cylinder(anfangspunkt, balken.laenge / 3, 0, endpunkt, balken.laenge / 3, 0);
@@ -85,15 +66,29 @@ public class GleichLast {
         a3.setRadius(0.01 * balken.laenge);
         t1.setOrigin(endpunkt + 0.1, balken.laenge / 3, 0);
         t1.setHeight(0.075 * balken.laenge);
-        Text tak1 = new Text("" + runden(berechneAuflagerkraft1(),3));
+        Text tak1 = new Text("" + Balken.doubleRunden(berechneAuflagerkraft1(),3));
         v.addObject3D(tak1);
         tak1.setColor("blue");
         tak1.setOrigin(0.1, -balken.laenge / 3, 0);
-        Text tak2 = new Text("" + runden(berechneAuflagerkraft2(),3));
+        Text tak2 = new Text("" + Balken.doubleRunden(berechneAuflagerkraft2(),3));
         v.addObject3D(tak2);
         tak2.setColor("blue");
         tak2.setOrigin(balken.laenge + 0.1, -balken.laenge / 3, 0);
         tak1.setHeight(0.075 * balken.laenge);
         tak2.setHeight(0.075 * balken.laenge);
+    }
+    public double getAnfangspunkt() {
+        return anfangspunkt;
+    }
+
+    public void setAnfangspunkt(double anfangspunkt) {
+        this.anfangspunkt = anfangspunkt;
+    }
+
+    public double getEndpunkt() {
+        return endpunkt;
+    }
+    public double getKraft() {
+        return kraft;
     }
 }

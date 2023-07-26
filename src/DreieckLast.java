@@ -32,7 +32,7 @@ public class DreieckLast {
     public double berechnelange(){
         return endpunkt-anfangspunkt;
     }
-    public double BerechneResultierendeStandort(){
+    public double berechneResultierendeStandort(){
         if(ausrichtung == 1){
             return ((berechnelange()) * 2 / 3) + anfangspunkt;
         } else {
@@ -47,7 +47,7 @@ public class DreieckLast {
         return ak1;
     }
     public double berechneAuflagerkraft2(){
-        double ak2= BerechneResultierendeStandort() * berechneResultierende() / balken.laenge;
+        double ak2= berechneResultierendeStandort() * berechneResultierende() / balken.laenge;
         return ak2;
     }
     //Die Methode Runden ist für die Visualiesierung Wichtig da sonst die Werte der Kräfte teilweise zu viele Nachkommastellen haben wodurch sie zu viel Platz einnehmen
@@ -130,4 +130,5 @@ public class DreieckLast {
     public void setAnfangspunkt(double anfangspunkt) {
         this.anfangspunkt = anfangspunkt;
     }
+
 }

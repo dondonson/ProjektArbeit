@@ -10,7 +10,7 @@ public class Balken {
     double laenge;
 
     //Konstruktor
-    //bl=Balken Lange
+    //bl=Balken Laenge
     public Balken(double bl){
         laenge=bl;
     }
@@ -30,4 +30,9 @@ public class Balken {
         aak1.setRadius(0.01*laenge);
         aak2.setRadius(0.01*laenge);
     }
+    public static double doubleRunden(double wert, int kommastelle){
+        double x = Math.pow(10,kommastelle);
+        return Math.rint(wert*x)/x;
+    }
 }
+
