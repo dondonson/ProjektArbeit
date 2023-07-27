@@ -103,16 +103,8 @@ public class DreieckLast {
         return ausrichtung;
     }
 
-    public void setAusrichtung(int ausrichtung) {
-        this.ausrichtung = ausrichtung;
-    }
-
     public double getKraft() {
         return kraft;
-    }
-
-    public void setKraft(double kraft) {
-        this.kraft = kraft;
     }
 
     public double getAnfangspunkt() {
@@ -121,14 +113,6 @@ public class DreieckLast {
 
     public double getEndpunkt() {
         return endpunkt;
-    }
-
-    public void setEndpunkt(double endpunkt) {
-        this.endpunkt = endpunkt;
-    }
-
-    public void setAnfangspunkt(double anfangspunkt) {
-        this.anfangspunkt = anfangspunkt;
     }
 
 }

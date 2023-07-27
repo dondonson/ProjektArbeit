@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="ICEB1">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../../Downloads/ICEB.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>

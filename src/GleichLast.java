@@ -7,8 +7,6 @@ import inf.v3d.obj.Arrow;
 import inf.v3d.obj.Cylinder;
 import inf.v3d.obj.Text;
 import inf.v3d.view.Viewer;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 
 public class GleichLast {
     //Attribute
@@ -80,11 +78,6 @@ public class GleichLast {
     public double getAnfangspunkt() {
         return anfangspunkt;
     }
-
-    public void setAnfangspunkt(double anfangspunkt) {
-        this.anfangspunkt = anfangspunkt;
-    }
-
     public double getEndpunkt() {
         return endpunkt;
     }
