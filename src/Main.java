@@ -22,7 +22,6 @@ public class Main {
         double extramaM=0;
         double nullstelle=0;
 
-
         //Menü
         System.out.println("Bitte geben Sie alle ihre Angaben in Metern ein");
         //Erstellung vom Balken
@@ -77,14 +76,14 @@ public class Main {
             drawquerkraftP.addVertex(0,0,0);
             drawquerkraftP.addVertex(0,ak1,0);
             drawquerkraftP.addVertex(p[0].getOrt(),ak1,0);
-                double[] qP = new double[p.length];
-                double x = 0;
-                for (int i = 0; i < mengePunktkraefte; i++){
-                    drawquerkraftP.addVertex(p[i].getOrt(),ak1+x,0);
-                    qP[i] = ak1 + x - p[i].getKraft();
-                    x = x - p[i].getKraft();
-                    drawquerkraftP.addVertex(p[i].getOrt(), qP[i],0);
-                }
+            double[] qP = new double[p.length];
+            double x = 0;
+            for (int i = 0; i < mengePunktkraefte; i++){
+                drawquerkraftP.addVertex(p[i].getOrt(),ak1+x,0);
+                qP[i] = ak1 + x - p[i].getKraft();
+                x = x - p[i].getKraft();
+                drawquerkraftP.addVertex(p[i].getOrt(), qP[i],0);
+            }
             drawquerkraftP.addVertex(b.laenge, ak1+x, 0);
             drawquerkraftP.addVertex(b.laenge, 0,0);
             v.addObject3D(drawquerkraftP);
@@ -97,16 +96,16 @@ public class Main {
 
             drawmomentP.addVertex(0,0,0);
             drawmomentP.addVertex(p[0].getOrt(),ak1*p[0].getOrt(),0);
-                double lvm = 0; //lvm = leitvariable momentenverlauf
-                for (int i = 0; i < p.length; i++){
-                    if (i<p.length-1){
-                        drawmomentP.addVertex(p[i].getOrt(), ak1*p[i].getOrt()+lvm, 0);
-                        lvm = lvm-p[i].getKraft()*(p[i+1].getOrt()-p[i].getOrt());
-                    } else {
-                        drawmomentP.addVertex(p[i].getOrt(), ak1*p[i].getOrt()+lvm, 0);
-                        lvm = lvm-p[i].getKraft()*(b.laenge-p[i].getOrt());
-                    }
+            double lvm = 0; //lvm = leitvariable momentenverlauf
+            for (int i = 0; i < p.length; i++){
+                if (i<p.length-1){
+                    drawmomentP.addVertex(p[i].getOrt(), ak1*p[i].getOrt()+lvm, 0);
+                    lvm = lvm-p[i].getKraft()*(p[i+1].getOrt()-p[i].getOrt());
+                } else {
+                    drawmomentP.addVertex(p[i].getOrt(), ak1*p[i].getOrt()+lvm, 0);
+                    lvm = lvm-p[i].getKraft()*(b.laenge-p[i].getOrt());
                 }
+            }
             drawmomentP.addVertex(b.laenge, 0,0);
 
             v.addObject3D(drawmomentP);
@@ -139,8 +138,8 @@ public class Main {
 
             //Querkraft
             //Darstellung
-            double A = (g.getKraft()*g.berechnelange()/ b.laenge*(g.berechnelange()/2+(b.laenge-g.getEndpunkt())));
-            double B = g.getKraft()*g.berechnelange()-A;
+            double A = (g.getKraft()*g.berechneLeange()/ b.laenge*(g.berechneLeange()/2+(b.laenge-g.getEndpunkt())));
+            double B = g.getKraft()*g.berechneLeange()-A;
 
             Polyline querkraftG = new Polyline();
             querkraftG.setVisible(true);
@@ -162,13 +161,12 @@ public class Main {
             momentverlaufG.setLinewidth(5);
             momentverlaufG.setColor("green");
 
-
             double Aa = ak1*g.getAnfangspunkt();
             double Bb = ak2*(b.laenge-g.getEndpunkt());
 
             momentverlaufG.addVertex(0,0,0);
             momentverlaufG.addVertex(g.getAnfangspunkt(), -1*Aa,0);
-            for (double i = 0; i <= g.berechnelange();i = i+0.1){
+            for (double i = 0; i <= g.berechneLeange(); i = i+0.1){
                 momentverlaufG.addVertex(i + g.getAnfangspunkt(), -1*(ak1*(i+g.getAnfangspunkt()) - (i*g.getKraft()*(i/2))),0);
             }
             momentverlaufG.addVertex(g.getEndpunkt(), -1*Bb,0);
@@ -180,11 +178,10 @@ public class Main {
             extremaortQ1 = extremaortQ1 + g.getAnfangspunkt();
             extremaortQ2 = extremaortQ2 + g.getEndpunkt();
             nullstelle = A/g.getKraft();
-            extramaM = extramaM + (g.getKraft()*Math.pow(g.berechnelange(), 2)/8);
+            extramaM = extramaM + (g.getKraft()*Math.pow(g.berechneLeange(), 2)/8);
 
             //Visualisierung
                 g.zu3D(v);
-
 
          //DreieckLast
          } else {
@@ -212,29 +209,29 @@ public class Main {
             drawquerkraftD.setVisible(true);
             drawquerkraftD.setColor("yellow");
 
-            double A = (d.getKraft() / d.berechnelange()) / 2;
+            double A = (d.getKraft() / d.berechneLeange()) / 2;
 
             //steigende Kraft
             if (d.getAusrichtung() == 1) {
                 drawquerkraftD.addVertex(0, 0, 0);
                 drawquerkraftD.addVertex(0, ak1, 0);
                 drawquerkraftD.addVertex(d.getAnfangspunkt(), ak1, 0);
-                for (double i = 0; i <= d.berechnelange(); i = i + 0.1) {
+                for (double i = 0; i <= d.berechneLeange(); i = i + 0.1) {
                     i = Balken.doubleRunden(i, 1);
                     drawquerkraftD.addVertex(d.getAnfangspunkt() + i, ak1 - A * Math.pow(i, 2), 0);
                 }
-                drawquerkraftD.addVertex(b.laenge, ak1 - A * Math.pow(d.berechnelange(), 2), 0);
+                drawquerkraftD.addVertex(b.laenge, ak1 - A * Math.pow(d.berechneLeange(), 2), 0);
                 drawquerkraftD.addVertex(b.laenge, 0, 0);
             //fallende Kraft
             } else {
                 drawquerkraftD.addVertex(b.laenge, 0, 0);
                 drawquerkraftD.addVertex(b.laenge, -ak2, 0);
                 drawquerkraftD.addVertex(d.getEndpunkt(), -ak2, 0);
-                for (double i = 0; i <= d.berechnelange(); i = i + 0.1) {
+                for (double i = 0; i <= d.berechneLeange(); i = i + 0.1) {
                     i = Balken.doubleRunden(i, 1);
                     drawquerkraftD.addVertex(d.getEndpunkt() - i, -ak2 + A * Math.pow(i, 2), 0);
                 }
-                drawquerkraftD.addVertex(0, -ak2 + A * Math.pow(d.berechnelange(), 2), 0);
+                drawquerkraftD.addVertex(0, -ak2 + A * Math.pow(d.berechneLeange(), 2), 0);
                 drawquerkraftD.addVertex(0, 0, 0);
             }
 
@@ -253,8 +250,8 @@ public class Main {
                 for (double i = 0; i <= b.laenge - d.getAnfangspunkt(); i = i + 0.1) {
                     double C = i + d.getAnfangspunkt();
                     i = Balken.doubleRunden(i, 1);
-                    if (i <= d.berechnelange()) {
-                        momentverlaufD.addVertex(C, (ak1 * C - (d.getKraft()*Math.pow(i,3))/(6*d.berechnelange())) * -1, 0);
+                    if (i <= d.berechneLeange()) {
+                        momentverlaufD.addVertex(C, (ak1 * C - (d.getKraft()*Math.pow(i,3))/(6*d.berechneLeange())) * -1, 0);
                     } else {
                         momentverlaufD.addVertex(C, -1 * (ak1 * C - d.berechneResultierende()*(C-d.berechneResultierendeStandort())), 0);
                     }
@@ -268,8 +265,8 @@ public class Main {
                 for (double i = 0; i <= d.getEndpunkt(); i = i + 0.1) {
                     double C = d.getEndpunkt() - i;
                     i = Balken.doubleRunden(i, 1);
-                    if (i <= d.berechnelange()) {
-                        momentverlaufD.addVertex(C, (ak2 * (b.laenge-C) - (d.getKraft()*Math.pow(i,3))/(6*d.berechnelange())) * -1, 0);
+                    if (i <= d.berechneLeange()) {
+                        momentverlaufD.addVertex(C, (ak2 * (b.laenge-C) - (d.getKraft()*Math.pow(i,3))/(6*d.berechneLeange())) * -1, 0);
                     } else {
                         momentverlaufD.addVertex(C, -1 * (ak2 * (b.laenge-C) - (d.berechneResultierende() * (d.berechneResultierendeStandort() - C))), 0);
                     }
@@ -281,8 +278,8 @@ public class Main {
             //Variabeln für das Speichern
             extremaortQ1 = extremaortQ1 + d.getAnfangspunkt();
             extremaortQ2 = extremaortQ2 + d.getEndpunkt();
-            nullstelle = d.berechnelange()/Math.sqrt(3)+d.getAnfangspunkt();
-            extramaM = extramaM + (d.getKraft()*Math.pow(d.berechnelange(), 2)/(9*Math.sqrt(3)));
+            nullstelle = d.berechneLeange()/Math.sqrt(3)+d.getAnfangspunkt();
+            extramaM = extramaM + (d.getKraft()*Math.pow(d.berechneLeange(), 2)/(9*Math.sqrt(3)));
 
             //Visualiesierung
             d.zu3D(v);

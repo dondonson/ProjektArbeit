@@ -26,11 +26,11 @@ public class GleichLast {
     public double berechneResultierendeStandort(){
         return (anfangspunkt+endpunkt)/2;
     }
-    public double berechnelange(){
+    public double berechneLeange(){
         return endpunkt-anfangspunkt;
     }
     public double berechneResultierende(){
-        return berechnelange()*kraft;
+        return berechneLeange()*kraft;
     }
     public double berechneAuflagerkraft1(){
         double ak1= berechneResultierende() - berechneAuflagerkraft2();
